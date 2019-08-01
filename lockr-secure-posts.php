@@ -98,7 +98,7 @@ add_action( 'the_post', 'lockr_secure_post_result_decrypt', '-10000' );
 function lockr_secure_post_postpass_check() {
 	$hash_pass = get_option( 'lockr_hash_pass' );
 
-	if ( class_exists( Pantheon_sessions ) && ! empty( $hash_pass ) ) {
+	if ( class_exists( 'Pantheon_sessions' ) && ! empty( $hash_pass ) ) {
 
 		session_start();
 		require_once ABSPATH . WPINC . '/class-phpass.php';
@@ -154,7 +154,7 @@ function lockr_password_form_check( $required, $post ) {
 		return false;
 	} else {
 		$hash_pass = get_option( 'lockr_hash_pass' );
-		if ( class_exists( Pantheon_sessions ) && ! empty( $hash_pass ) ) {
+		if ( class_exists( 'Pantheon_sessions' ) && ! empty( $hash_pass ) ) {
 			$_SESSION['current_post'] = $post->ID;
 			if ( isset( $_SESSION[ 'post_' . $post->ID ] ) ) {
 				return $post->post_password !== $_SESSION[ 'post_' . $post->ID ];
